@@ -41,7 +41,6 @@ import java.math.BigDecimal;
  */
 
 public class IndicatorSeekBar extends View {
-    private static final int THUMB_MAX_WIDTH = 30;
     private static final String FORMAT_PROGRESS = "${PROGRESS}";
     private static final String FORMAT_TICK_TEXT = "${TICK_TEXT}";
     private Context mContext;
@@ -240,13 +239,13 @@ public class IndicatorSeekBar extends View {
             mThumbRadius = mThumbSize / 2.0f;
             mThumbTouchRadius = mThumbRadius * 1.2f;
         } else {
-            mThumbRadius = Math.min(SizeUtils.dp2px(mContext, THUMB_MAX_WIDTH), mThumbSize) / 2.0f;
+            mThumbRadius = mThumbSize / 2.0f;
             mThumbTouchRadius = mThumbRadius;
         }
         if (mTickMarksDrawable == null) {
             mTickRadius = mTickMarksSize / 2.0f;
         } else {
-            mTickRadius = Math.min(SizeUtils.dp2px(mContext, THUMB_MAX_WIDTH), mTickMarksSize) / 2.0f;
+            mTickRadius = mTickMarksSize / 2.0f;
         }
         mCustomDrawableMaxHeight = Math.max(mThumbTouchRadius, mTickRadius) * 2.0f;
         initStrokePaint();
@@ -711,7 +710,7 @@ public class IndicatorSeekBar extends View {
         }
         int width;
         int height;
-        int maxRange = SizeUtils.dp2px(mContext, THUMB_MAX_WIDTH);
+        int maxRange = mThumbSize;
         int intrinsicWidth = drawable.getIntrinsicWidth();
         if (intrinsicWidth > maxRange) {
             if (isThumb) {
@@ -1702,7 +1701,7 @@ public class IndicatorSeekBar extends View {
             this.mPressedThumbBitmap = null;
         } else {
             this.mThumbDrawable = drawable;
-            this.mThumbRadius = Math.min(SizeUtils.dp2px(mContext, THUMB_MAX_WIDTH), mThumbSize) / 2.0f;
+            this.mThumbRadius = mThumbSize / 2.0f;
             this.mThumbTouchRadius = mThumbRadius;
             this.mCustomDrawableMaxHeight = Math.max(mThumbTouchRadius, mTickRadius) * 2.0f;
             initThumbBitmap();
@@ -1772,7 +1771,7 @@ public class IndicatorSeekBar extends View {
             this.mSelectTickMarksBitmap = null;
         } else {
             this.mTickMarksDrawable = drawable;
-            this.mTickRadius = Math.min(SizeUtils.dp2px(mContext, THUMB_MAX_WIDTH), mTickMarksSize) / 2.0f;
+            this.mTickRadius = mTickMarksSize / 2.0f;
             this.mCustomDrawableMaxHeight = Math.max(mThumbTouchRadius, mTickRadius) * 2.0f;
             initTickMarksBitmap();
         }
