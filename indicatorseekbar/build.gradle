@@ -4,7 +4,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.searchy2'
 version = '2.2.0'
 
-def VERSION_NAME = "2.1.0"
+def VERSION_NAME = "2.1.2"
 
 ext {
     bintrayRepo = 'maven'

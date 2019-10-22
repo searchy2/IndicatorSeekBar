@@ -10,7 +10,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
@@ -18,6 +17,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -39,6 +39,16 @@ import java.util.Date;
  * A custom SeekBar on Android, which can be changed the size ,
  * color , thumb drawable , tick drawable , texts , indicator;
  * also can show an indicator view above SeekBar when seeking.
+ * <p>
+ * https://github.com/warkiz/IndicatorSeekBar
+ * <p>
+ * Donation/打赏:
+ * If this library is helpful to you ,you can give me a donation by:
+ *
+ * @see <a href="https://www.paypal.me/BuyMeACupOfTeaThx">ZhuanGuangQuan's Paypal</a>, or
+ * @see <a href="https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/wechat_pay.png?raw=true">微信支付</a>, or
+ * @see <a href="https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/alipay.png?raw=true">支付宝</a>
+ * <p>
  */
 
 public class IndicatorSeekBar extends View {
@@ -145,9 +155,13 @@ public class IndicatorSeekBar extends View {
     }
 
     public IndicatorSeekBar(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        this.mContext = context;
+        initAttrs(mContext, attrs);
+        initParams();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public IndicatorSeekBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.mContext = context;
@@ -384,7 +398,7 @@ public class IndicatorSeekBar extends View {
         }
         initTextsArray();
         //adjust thumb auto,so find out the closest progress in the mProgressArr array and replace it.
-        //it is not necessary to adjust thumb while count is less than 3.
+        //it is not necessary to adjust thumb while count is less than 2.
         if (mTicksCount > 2) {
             mProgress = mProgressArr[getClosestIndex()];
             lastProgress = mProgress;
@@ -1022,10 +1036,7 @@ public class IndicatorSeekBar extends View {
         if (mThumbDrawable == null) {
             return;
         }
-        if (mThumbDrawable instanceof BitmapDrawable) {
-            mThumbBitmap = getDrawBitmap(mThumbDrawable, true);
-            mPressedThumbBitmap = mThumbBitmap;
-        } else if (mThumbDrawable instanceof StateListDrawable) {
+        if (mThumbDrawable instanceof StateListDrawable) {
             try {
                 StateListDrawable listDrawable = (StateListDrawable) mThumbDrawable;
                 Class<? extends StateListDrawable> aClass = listDrawable.getClass();
@@ -1053,12 +1064,12 @@ public class IndicatorSeekBar extends View {
                     throw new IllegalArgumentException("the format of the selector thumb drawable is wrong!");
                 }
             } catch (Exception e) {
-                throw new RuntimeException("Something wrong happened when parsing thumb selector drawable." + e.getMessage());
+                mThumbBitmap = getDrawBitmap(mThumbDrawable, true);
+                mPressedThumbBitmap = mThumbBitmap;
             }
-
         } else {
-            //please check your selector drawable's format, please see above to correct.
-            throw new IllegalArgumentException("Nonsupport this drawable's type for custom thumb drawable!");
+            mThumbBitmap = getDrawBitmap(mThumbDrawable, true);
+            mPressedThumbBitmap = mThumbBitmap;
         }
     }
 
@@ -1081,17 +1092,8 @@ public class IndicatorSeekBar extends View {
      * </selector>
      */
     private void initTickMarksBitmap() {
-        if (mTickMarksDrawable instanceof BitmapDrawable) {
-            mUnselectTickMarksBitmap = getDrawBitmap(mTickMarksDrawable, false);
-            mSelectTickMarksBitmap = mUnselectTickMarksBitmap;
-        } else if (mTickMarksDrawable instanceof StateListDrawable) {
+        if (mTickMarksDrawable instanceof StateListDrawable) {
             StateListDrawable listDrawable = (StateListDrawable) mTickMarksDrawable;
-            //This library has used some android hidden API ，so it‘s will occur some error if you android sdk is in normal.
-            // if you want to run this library with firm belief, you can download the hidden API [android.jar]
-            // (https://github.com/warkiz/android-hidden-api/blob/master/android-27/android.jar) and replace
-            // the old one in \SDK\platforms\android-27\ . Btw, take a backup first.
-//            int stateCount = listDrawable.getStateCount();
-
             try {
                 Class<? extends StateListDrawable> aClass = listDrawable.getClass();
                 Method getStateCount = aClass.getMethod("getStateCount");
@@ -1119,12 +1121,14 @@ public class IndicatorSeekBar extends View {
                     throw new IllegalArgumentException("the format of the selector TickMarks drawable is wrong!");
                 }
             } catch (Exception e) {
-                throw new RuntimeException("Something wrong happened when parsing TickMarks selector drawable." + e.getMessage());
+                mUnselectTickMarksBitmap = getDrawBitmap(mTickMarksDrawable, false);
+                mSelectTickMarksBitmap = mUnselectTickMarksBitmap;
             }
         } else {
-            //please check your selector drawable's format, please see above to correct.
-            throw new IllegalArgumentException("Nonsupport this drawable's type for custom TickMarks drawable!");
+            mUnselectTickMarksBitmap = getDrawBitmap(mTickMarksDrawable, false);
+            mSelectTickMarksBitmap = mUnselectTickMarksBitmap;
         }
+
     }
 
     @Override
@@ -1401,7 +1405,7 @@ public class IndicatorSeekBar extends View {
     }
 
     private boolean autoAdjustThumb() {
-        if (mTicksCount < 3 || !mSeekSmoothly) {//it is not necessary to adjust while count less than 3 .
+        if (mTicksCount < 3 || !mSeekSmoothly) {//it is not necessary to adjust while count less than 2.
             return false;
         }
         if (!mAdjustAuto) {
@@ -1663,7 +1667,7 @@ public class IndicatorSeekBar extends View {
         lastProgress = mProgress;
         mProgress = progress < mMin ? mMin : (progress > mMax ? mMax : progress);
         //adjust to the closest tick's progress
-        if (mTicksCount > 2) {
+        if ((!mSeekSmoothly) && mTicksCount > 2) {
             mProgress = mProgressArr[getClosestIndex()];
         }
         setSeekListener(false);

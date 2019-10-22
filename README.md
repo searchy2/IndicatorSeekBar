@@ -9,7 +9,7 @@ This is a customizable SeekBar library on Android. Also, If you don't need indic
 [ 中文.md ](https://github.com/warkiz/IndicatorSeekBar/blob/master/README_zh.md)
 
 
-## OverView
+## Overview
 <img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/gif/overview.png?raw=true" width = "392" height = "115"/>
 
 ## Screenshot
@@ -26,7 +26,7 @@ This is a customizable SeekBar library on Android. Also, If you don't need indic
 ## Setup
 
 ```gradle
-implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.0'
+implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'
 ```
 
 ## Usage
@@ -56,7 +56,8 @@ implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.0'
     app:isb_track_background_color="@color/color_gray"
     app:isb_track_background_size="2dp"
     app:isb_track_progress_color="@color/color_blue"
-    app:isb_track_progress_size="4dp" />
+    app:isb_track_progress_size="4dp"
+    app:isb_only_thumb_draggable="false"/>
 ```
 
 #### Java
@@ -86,6 +87,7 @@ implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.0'
                 .trackProgressSize(4)
                 .trackBackgroundColor(getResources().getColor(R.color.color_gray))
                 .trackBackgroundSize(2)
+		.onlyThumbDraggable(false)
                 .build();
 
 ```
@@ -147,12 +149,18 @@ If you want to show the progress with suffix: `%` ，the code like：
 
 ```Java
 seekBar.setIndicatorTextFormat("${PROGRESS} %")
+
+Kotlin:
+seekBar.setIndicatorTextFormat("\${PROGRESS} %")
 ```
 
 or want to show the tick text with prefix: `I am` ，the code like：
 
 ```Java
 seekBar.setIndicatorTextFormat("I am ${TICK_TEXT}")
+
+Kotlin:
+seekBar.setIndicatorTextFormat("I am \${TICK_TEXT}")
 ```
 
 ## Custom section tracks color
@@ -265,7 +273,40 @@ seekBar.setOnSeekChangeListener(new OnSeekChangeListener() {
 
 ## Attributes
 
-[ attr.xml ](https://github.com/warkiz/IndicatorSeekBar/blob/master/indicatorseekBar/src/main/res/values/attr.xml)
+[ attr.xml ](https://github.com/warkiz/IndicatorSeekBar/blob/master/indicatorseekbar/src/main/res/values/attr.xml)
+
+## Donation by [ Paypal ](https://www.paypal.me/BuyMeACupOfTeaThx), thanks
+
+So happy to receive your donation or encouraging words , and I will post this on my [ thanks-lists ](https://github.com/warkiz/IndicatorSeekBar#Thanks-lists)
+, thanks.
+
+## 打赏([ 支付宝 ](https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/alipay.png?raw=true))([ 微信支付 ](https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/wechat_pay.png?raw=true))
+
+自从文档里公布了二维码，我收到国内的朋友的一些打赏，虽然金额不大，但是一些支持和鼓励的话语还是让我感到开心，非常感谢。
+
+感谢所有之前支持我的朋友。如果下次你要给我打赏，可以顺带写上你的github地址，我会在这里用[ 链接 ](https://github.com/warkiz/IndicatorSeekBar#Thanks-lists)贴出来，算是相互鼓励。
+
+## Thanks-lists
+
+非常感谢列表中的朋友，你们的肯定和支持是我前进的最大动力！
+
+Thanks for all the friends on the lists!
+
+|Name/昵称|Date/日期|Payment Tools/方式|Words/留言|Friendly link/友情连接|
+|:---:|:---:|:---:|:---:|:---:|
+|[E*e]|2019-06-27|微信| | |
+|[*●]|2019-06-14|微信| | |
+|[*宣]|2019-06-05|支付宝| | |
+|[*圆]|2019-05-29|支付宝|加油|[GitHub/SaltedFish999](https://github.com/SaltedFish999)|
+|[*兴明]|2019-02-12|支付宝| |[GitHub/jdpxiaoming](https://github.com/jdpxiaoming)|
+|[*j!n]|2019-01-08|微信|666|[GitHub/jincom](https://github.com/jincom)|
+|[*乐]|2018-12-19|支付宝| | |
+|[*勇]|2018-12-05|微信| | |
+|[*天佑]|2018-11-05|支付宝| | |
+|[*勇]|2018-10-16|支付宝| | |
+|[*利成]|2018-05-22|支付宝| | |
+
+<img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/alipay.png?raw=true" /><img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/wechat_pay.png?raw=true" />
 
 ## Contact me
 
@@ -273,21 +314,17 @@ Feel free to contact me if you have any trouble on this project:
 1. Create an issue.
 2. Send mail to me, "warkiz".concat("4j").concat("@").concat("gmail.com")
 
-## Buy me a coffee
 
-Buy me a coffee by Alipay or WeChatPay, thanks
-
-<img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/alipay.png?raw=true" width = "400" height = "531"/><img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/wechat_pay.png?raw=true" width = "387" height = "531"/>
 ## License
 
-	Copyright (C) 2017 zhuangguangquan(庄广权)
-
+	Copyright (C) 2017 zhuangguangquan
+	
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
 	You may obtain a copy of the License at
-
+	
 	   http://www.apache.org/licenses/LICENSE-2.0
-
+	
 	Unless required by applicable law or agreed to in writing, software
 	distributed under the License is distributed on an "AS IS" BASIS,
 	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.

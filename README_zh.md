@@ -6,6 +6,7 @@
 
 这是一个安卓自定义SeekBar库。 另外, 如果你不需要指示器并且希望文字显示在SeekBar的顶部, 请看另外一个[SeekBar库](https://github.com/warkiz/TickSeekBar)。  [  English.md ](https://github.com/warkiz/IndicatorSeekBar/blob/master/README.md)
 
+
 ## 预览
 
 <img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/gif/overview.png?raw=true" width = "392" height = "115"/>
@@ -13,13 +14,13 @@
 
 ## 截图
 
-
 <img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/gif/continuous.gif?raw=true" width = "264" height = "464"/><img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/gif/discrete_1.gif?raw=true" width = "264" height = "464"/><img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/gif/discrete_2.gif?raw=true" width = "264" height = "464"/><img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/gif/custom.gif?raw=true" width = "264" height = "464"/><img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/gif/java_build.gif?raw=true" width = "264" height = "464"/><img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/gif/indicator.gif?raw=true" width = "264" height = "464"/>
 
 ## 演示
 [下载demo.apk](https://github.com/warkiz/IndicatorSeekBar/raw/master/apk/demo.apk)
 
  扫码下载：
+
 <img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/gif/downloadQRcode.png?raw=true" width = "100" height = "100"/>
 
 
@@ -27,7 +28,7 @@
 ## 初始化
 
 ```gradle
-implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.0'
+implementation 'com.github.warkiz.widget:indicatorseekbar:2.1.2'
 ```
 
 ## 使用
@@ -133,12 +134,18 @@ new IndicatorStayLayout(getContext()).attachTo(seekbar);
 
 ```Java
 seekbar.setIndicatorTextFormat("${PROGRESS} %")
+
+Kotlin:
+seekbar.setIndicatorTextFormat("\${PROGRESS} %")
 ```
 
 如果你想显示带前缀 `I am`的指示器tick text文字 ，代码如下：
 
 ```Java
 seekbar.setIndicatorTextFormat("I am ${TICK_TEXT}")
+
+Kotlin:
+seekbar.setIndicatorTextFormat("I am \${TICK_TEXT}")
 ```
 
 ## 自定义每一节的track块颜色
@@ -252,20 +259,29 @@ seekBar.setOnSeekChangeListener(new OnSeekChangeListener() {
 
 [ attr.xml ](https://github.com/warkiz/IndicatorSeekBar/blob/master/indicatorseekbar/src/main/res/values/attr.xml)
 
+
+## Donation by [ Paypal ](https://www.paypal.me/BuyMeACupOfTeaThx), thanks
+
+So happy to receive your donation or encouraging words , and I will post this on my [ thanks-lists ](https://github.com/warkiz/IndicatorSeekBar#Thanks-lists)
+, thanks.
+
+## 打赏([ 支付宝 ](https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/alipay.png?raw=true))([ 微信支付 ](https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/wechat_pay.png?raw=true))
+
+自从文档里公布了二维码，我收到国内的朋友的一些打赏，虽然金额不大，但是一些支持和鼓励的话语还是让我感到开心，非常感谢。
+
+感谢所有之前支持我的朋友。如果下次你要给我打赏，可以顺带写上你的github地址，我会在这里用[ 链接 ](https://github.com/warkiz/IndicatorSeekBar#Thanks-lists)贴出来，算是相互鼓励。
+
+<img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/alipay.png?raw=true" /><img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/wechat_pay.png?raw=true" />
+
 ## 联系我
 
-Feel free to contact me if you have any trouble on this project:
-1. Create an issue.
-2. Send mail to me, "warkiz".concat("4j").concat("@").concat("gmail.com")
+如果你对项目有疑问，欢迎通过下面的方式联系我:
+1. 提交issue.
+2. 发邮件, "warkiz".concat("4j").concat("@").concat("gmail.com")
 
-## Buy me a coffee
+## 证书
 
-Buy me a coffee by Alipay or WeChatPay, thanks
-
-<img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/alipay.png?raw=true" width = "400" height = "531"/><img src="https://github.com/warkiz/IndicatorSeekBar/blob/master/app/src/main/res/mipmap-xxhdpi/wechat_pay.png?raw=true" width = "387" height = "531"/>
-## License
-
-	Copyright (C) 2017 zhuangguangquan(庄广权)
+	Copyright (C) 2017 zhuangguangquan
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -278,3 +294,4 @@ Buy me a coffee by Alipay or WeChatPay, thanks
 	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	See the License for the specific language governing permissions and
 	limitations under the License.
+
